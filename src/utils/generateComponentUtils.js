@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 const path = require('path');
 const replace = require('replace');
-const { camelCase, kebabCase, snakeCase } = require('lodash');
+const { camelCase, kebabCase, snakeCase, upperCase, lowerCase } = require('lodash');
 const { existsSync, outputFileSync, readFileSync } = require('fs-extra');
 
 const componentJsTemplate = require('../templates/component/componentJsTemplate');
@@ -384,6 +384,70 @@ function generateComponent(componentName, cmd, cliConfigFile) {
           replace({
             regex: 'template_name',
             replacement: snakeCase(componentName),
+            paths: [componentPath],
+            recursive: false,
+            silent: true,
+          });
+
+          replace({
+            regex: 'UpperTemplateName',
+            replacement: upperCase(componentName),
+            paths: [componentPath],
+            recursive: false,
+            silent: true,
+          });
+
+          replace({
+            regex: 'upperTemplateName',
+            replacement: upperCase(camelCase(componentName)),
+            paths: [componentPath],
+            recursive: false,
+            silent: true,
+          });
+
+          replace({
+            regex: 'upper-template-name',
+            replacement: upperCase(snakeCase(componentName)),
+            paths: [componentPath],
+            recursive: false,
+            silent: true,
+          });
+
+          replace({
+            regex: 'upper_template_name',
+            replacement: upperCase(kebabCase(componentName)),
+            paths: [componentPath],
+            recursive: false,
+            silent: true,
+          });
+
+          replace({
+            regex: 'LowerTemplateName',
+            replacement: lowerCase(componentName),
+            paths: [componentPath],
+            recursive: false,
+            silent: true,
+          });
+
+          replace({
+            regex: 'lowerTemplateName',
+            replacement: lowerCase(camelCase(componentName)),
+            paths: [componentPath],
+            recursive: false,
+            silent: true,
+          });
+
+          replace({
+            regex: 'lower-template-name',
+            replacement: lowerCase(kebabCase(componentName)),
+            paths: [componentPath],
+            recursive: false,
+            silent: true,
+          });
+
+          replace({
+            regex: 'lower_template_name',
+            replacement: lowerCase(snakeCase(componentName)),
             paths: [componentPath],
             recursive: false,
             silent: true,
